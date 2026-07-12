@@ -35,12 +35,10 @@ def format_rupiah(angka):
 # FUNGSI GOOGLE SHEETS
 # ============================================
 def get_gsheet_client():
-    """Mendapatkan koneksi ke Google Sheets"""
     if not HAS_GSHEETS:
         return None, "Library gspread tidak tersedia"
     
     try:
-        # Ambil kredensial dari secrets
         creds_dict = {
             "type": st.secrets["gsheets"]["type"],
             "project_id": st.secrets["gsheets"]["project_id"],
@@ -63,7 +61,6 @@ def get_gsheet_client():
         return None, str(e)
 
 def save_to_gsheet():
-    """Menyimpan data ke Google Sheets"""
     if not HAS_GSHEETS:
         st.error("❌ Library gspread belum terinstall")
         return
@@ -94,7 +91,6 @@ def save_to_gsheet():
         st.error(f"❌ Gagal menyimpan: {e}")
 
 def load_from_gsheet():
-    """Memuat data dari Google Sheets"""
     if not HAS_GSHEETS:
         st.error("❌ Library gspread belum terinstall")
         return
@@ -161,7 +157,7 @@ with st.sidebar:
     items_m = st.text_input("📦 Item Produk (pisahkan dengan koma)")
     bayar_m = st.text_input("⏱️ Waktu Pembayaran (contoh: 30 hari)")
     
-    if st.button("➕ Tambahkan Data", use_container_width=True):
+    if st.button("➕ Tambahkan Data"):
         tanggal_str = tanggal_m.strftime("%d/%m/%Y")
         
         data = {
@@ -189,10 +185,10 @@ with st.sidebar:
     
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("💾 Simpan ke GSheet", use_container_width=True):
+        if st.button("💾 Simpan ke GSheet"):
             save_to_gsheet()
     with col2:
-        if st.button("📂 Muat dari GSheet", use_container_width=True):
+        if st.button("📂 Muat dari GSheet"):
             load_from_gsheet()
 
 # ============================================
@@ -234,7 +230,7 @@ if st.session_state.data_po:
         max_nilai = df['total_nilai'].max() if 'total_nilai' in df.columns else 0
         st.metric("🏆 Tertinggi", format_rupiah(max_nilai))
     
-    if st.button("📥 Download Excel", use_container_width=True):
+    if st.button("📥 Download Excel"):
         output = io.BytesIO()
         with pd.ExcelWriter(output, engine='openpyxl') as writer:
             df.to_excel(writer, sheet_name='Data PO', index=False)
