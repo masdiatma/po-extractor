@@ -3,3 +3,6 @@ build-essential
 zlib1g-dev
 libjpeg-dev
 libpng-dev
+python3.12
+python3.12-dev
+python3.12-venv
