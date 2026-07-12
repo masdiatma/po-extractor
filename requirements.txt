@@ -1,7 +1,6 @@
-streamlit==1.31.0
+streamlit>=1.35.0
 pandas
 openpyxl
 gspread
 oauth2client
-pillow==10.4.0
-protobuf==4.25.3
+pillow>=10.0.0
