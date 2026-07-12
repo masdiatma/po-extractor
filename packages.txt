@@ -1,8 +1,0 @@
-python3-dev
-build-essential
-zlib1g-dev
-libjpeg-dev
-libpng-dev
-python3.11
-python3.11-dev
-python3.11-venv
